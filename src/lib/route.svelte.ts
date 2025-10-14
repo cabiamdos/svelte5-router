@@ -13,7 +13,7 @@ import { evaluators, type Condition, type Evaluation } from "./helpers/evaluator
 import { Identities } from "./helpers/identify";
 import { marshal } from "./helpers/marshal";
 import { normalize } from "./helpers/normalize";
-import { regexp } from "./helpers/regexp";
+import { parsePattern, matchPattern } from "./patterns";
 import type { Span, Trace } from "./helpers/tracing.svelte";
 import { urls, type ReturnParam } from "./helpers/urls";
 
@@ -497,34 +497,20 @@ export class Route {
    */
   test?(path: PathType): Evaluation {
     const matcher = urls.path(path.toString());
-    // Handle string paths being passed in at the route.path level:
+
+    // Handle string paths using AST-based pattern matching
     if (typeof this.path === "string") {
-      // Detect if this path contains regex syntax:
-      if (regexp.can(this.path)) {
-        // Path is a regex, so we need to test it against the path passed in:
-        const match = regexp.from(this.path).exec(matcher);
-        if (match) {
-          return {
-            condition: "exact-match",
-            params: match.groups
-          };
-        }
-      } else {
-        // Path is not a regex, so we then check if the path passed in is a direct match:
-        if (this.path === matcher) {
-          return {
-            condition: "exact-match",
-            params: this.path
-          };
-        } else if (paths.base(this.path, matcher)) {
-          return {
-            condition: "base-match",
-            params: {}
-          };
-        }
+      const pattern = parsePattern(this.path);
+      const match = matchPattern(pattern, matcher);
+
+      if (match.matched) {
+        return {
+          condition: match.exact ? "exact-match" : "base-match",
+          params: match.params
+        };
       }
     }
-    // Handle RegExp instances being passed in at the route.path level:
+    // Handle RegExp instances (legacy compatibility)
     else if (this.path instanceof RegExp) {
       const res = evaluators.any[Identities.regexp](this.path, matcher);
       if (res) {

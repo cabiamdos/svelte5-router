@@ -12,12 +12,12 @@ export namespace hash {
    * @param url The URL to parse
    * @returns Object containing path, query params, and hash components
    */
-  export const parse = (url: string): Hash => {
+  export const parse = (url: string): Hash | void => {
     if (url) {
       const [_, afterHash = ""] = url.split("#");
       const [path, queryString = ""] = afterHash.split("?");
       return {
-        path,
+        path: path || "",
         query: new Query(queryString),
         hash: afterHash
       };

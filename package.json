@@ -1,6 +1,6 @@
 {
   "name": "@mateothegreat/svelte5-router",
-  "version": "2.16.19",
+  "version": "3.0.0",
   "type": "module",
   "moduleResolution": "bundler",
   "sideEffects": false,
@@ -17,7 +17,7 @@
     "./**/*"
   ],
   "readme": "README.md",
-  "description": "🫦 An SPA router for Svelte that allows you to divide & conquer your app with nested routers, snippets, and more.",
+  "description": "🚀 Svelte5 Router v3 - Progressive disclosure router with AST-based pattern matching, middleware pipeline, and advanced route guards for modern Svelte applications.",
   "homepage": "https://github.com/mateothegreat/svelte5-router",
   "repository": {
     "type": "git",

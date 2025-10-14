@@ -7,7 +7,7 @@ export * from "./normalize";
 export * from "./objects";
 export * from "./pop";
 export * from "./query";
-export * from "./regexp";
+// regexp helpers removed in v3 - use AST pattern matching instead
 export * from "./replace";
 export * from "./runtime";
 export * from "./tracing.svelte";

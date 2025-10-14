@@ -4,10 +4,10 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "sourceMap": true,
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "useDefineForClassFields": true,
     "module": "ESNext",
     "allowJs": false,
@@ -16,7 +16,11 @@
     "noEmit": true,
     "isolatedModules": true,
     "moduleResolution": "bundler",
-    "allowArbitraryExtensions": true
+    "allowArbitraryExtensions": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": ["src"]
 }

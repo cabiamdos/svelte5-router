@@ -1,3 +1,10 @@
+export const withTimeout = <T>(p: Promise<T>, ms: number, label: string): Promise<T> => {
+  return Promise.race([
+    p,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error(`${label} timed out`)), ms))
+  ]);
+};
+
 /**
  * Wait for a predicate to become true with timeout handling.
  *
