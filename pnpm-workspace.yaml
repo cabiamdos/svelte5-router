@@ -1,0 +1,4 @@
+packages:
+  - v3/test/server
+  - v3
+  - .
