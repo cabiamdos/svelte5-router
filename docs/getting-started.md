@@ -17,7 +17,7 @@ In your `app.svelte` file, you can use the `Router` component to render your rou
   const routes: RouteConfig[] = [
     {
       component: Home
-    }
+    },
     {
       path: "products",
       component: Products
